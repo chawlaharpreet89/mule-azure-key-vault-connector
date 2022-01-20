@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension-documentation>
+    <configs>
+        <config name="config">
+            <description><![CDATA[Default configuration]]></description>
+            <parameters>
+                <parameter name="name">
+                    <description><![CDATA[The identifier of this element used to reference it in other components]]></description>
+                </parameter>
+                <parameter name="expirationPolicy">
+                    <description><![CDATA[Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.]]></description>
+                </parameter>
+            </parameters>
+        </config>
+    </configs>
+    <connections>
+        <connection name="connection">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="vaultName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="baseUri">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="tenantId">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="clientId">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="clientSecret">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="timeout">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="tlsContextFactory">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="reconnection">
+                    <description><![CDATA[When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy]]></description>
+                </parameter>
+            </parameters>
+        </connection>
+    </connections>
+    <extension name="Azure Key Vault">
+        <description><![CDATA[This is the main class of an extension, is the entry point from which configurations, connection providers, operations and sources are going to be declared.]]></description>
+        <parameters/>
+    </extension>
+    <operations>
+        <operation name="decryptKey">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="keyName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="alg">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="value">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="config-ref">
+                    <description><![CDATA[The name of the configuration to be used to execute this component]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="encryptKey">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="keyName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="alg">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="value">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="config-ref">
+                    <description><![CDATA[The name of the configuration to be used to execute this component]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="getCertificate">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="certificateName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="config-ref">
+                    <description><![CDATA[The name of the configuration to be used to execute this component]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="getKey">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="keyName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="config-ref">
+                    <description><![CDATA[The name of the configuration to be used to execute this component]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+        <operation name="getSecret">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="secretName">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="config-ref">
+                    <description><![CDATA[The name of the configuration to be used to execute this component]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[The name of a variable on which the operation's output will be placed]]></description>
+                </parameter>
+                <parameter name="targetValue">
+                    <description><![CDATA[An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable]]></description>
+                </parameter>
+                <parameter name="reconnectionStrategy">
+                    <description><![CDATA[A retry strategy in case of connectivity errors]]></description>
+                </parameter>
+            </parameters>
+        </operation>
+    </operations>
+    <sources/>
+    <types>
+        <type name="com.pwc.mule.connector.akv.provider.api.client.model.Certificate">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="attributes">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="cancellationRequested">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="certificate">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="contentType">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="id">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="kid">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="policy">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="requestId">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="sid">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="status">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="target">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="x5t">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.pwc.mule.connector.akv.provider.api.client.model.Decrypt">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="kid">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="value">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.pwc.mule.connector.akv.provider.api.client.model.Encrypt">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="kid">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="value">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.pwc.mule.connector.akv.provider.api.client.model.Key">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="attributes">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="key">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+        <type name="com.pwc.mule.connector.akv.provider.api.client.model.Secret">
+            <description><![CDATA[]]></description>
+            <parameters>
+                <parameter name="attributes">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="contentType">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="id">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="kid">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="managed">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="tags">
+                    <description><![CDATA[]]></description>
+                </parameter>
+                <parameter name="value">
+                    <description><![CDATA[]]></description>
+                </parameter>
+            </parameters>
+        </type>
+    </types>
+</extension-documentation>
