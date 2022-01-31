@@ -8,6 +8,18 @@ public class SecretList {
 	
 	@SerializedName(value = "value")
 	  private List secretList;
+	
+	@SerializedName(value = "nextLink")
+	  private String nextLink;
+	
+
+	public String getNextLink() {
+		return nextLink;
+	}
+
+	public void setNextLink(String nextLink) {
+		this.nextLink = nextLink;
+	}
 
 	public List getSecretList() {
 		return secretList;
