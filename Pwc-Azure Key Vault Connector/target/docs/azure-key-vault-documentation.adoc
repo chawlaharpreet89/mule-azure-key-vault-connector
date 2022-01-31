@@ -1,0 +1,671 @@
+
+
+= Azure Key Vault Module Connector Reference
+
+
+This is the main class of an extension, is the entry point from which configurations, connection providers, operations and sources are going to be declared.
+
+
+
+== Configurations
+---
+[[Config]]
+=== Config
+
+
+Default configuration
+
+
+==== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| <<Config_Connection, Connection>>
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Name a| String |  The identifier of this element used to reference it in other components |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit. |  | {nbsp}
+|===
+
+==== Connection Types
+[[Config_Connection]]
+===== Connection
+
+
+====== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Azure Vault Name a| String |  |  | *x*{nbsp}
+| Azure OAuth Base URI a| String |  |  https://login.microsoftonline.com/ | {nbsp}
+| Azure Tenant Id a| String |  |  | *x*{nbsp}
+| Service account client id a| String |  |  | *x*{nbsp}
+| Service account client secret a| String |  |  | *x*{nbsp}
+| Optional timeout in milliseconds for all Azure API calls a| Number |  |  | {nbsp}
+| Tls Context a| <<Tls>> |  |  | {nbsp}
+| Reconnection a| <<Reconnection>> |  When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | {nbsp}
+|===
+
+==== Associated Operations
+* <<DecryptKey>> {nbsp}
+* <<EncryptKey>> {nbsp}
+* <<GetCertificate>> {nbsp}
+* <<GetKey>> {nbsp}
+* <<GetSecret>> {nbsp}
+* <<GetSecretList>> {nbsp}
+
+
+
+== Operations
+
+[[DecryptKey]]
+== Decrypt Key
+`<akv:decrypt-key>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Key Name a| String |  |  | *x*{nbsp}
+| Alg a| String |  |  | *x*{nbsp}
+| Value a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<Decrypt>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+[[EncryptKey]]
+== Encrypt Key
+`<akv:encrypt-key>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Key Name a| String |  |  | *x*{nbsp}
+| Alg a| String |  |  | *x*{nbsp}
+| Value a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<Encrypt>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+[[GetCertificate]]
+== Get Certificate
+`<akv:get-certificate>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Certificate Name a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<Certificate>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+[[GetKey]]
+== Get Key
+`<akv:get-key>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Key Name a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<Key>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+[[GetSecret]]
+== Get Secret
+`<akv:get-secret>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Secret Name a| String |  |  | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<Secret>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+[[GetSecretList]]
+== Get Secret List
+`<akv:get-secret-list>`
+
+
+=== Parameters
+
+[%header%autowidth.spread]
+|===
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Config Ref a| ConfigurationProvider |  The name of the configuration to be used to execute this component |  | *x*{nbsp}
+| Target Variable a| String |  The name of a variable on which the operation's output will be placed |  | {nbsp}
+| Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  #[payload] | {nbsp}
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> |  A retry strategy in case of connectivity errors |  | {nbsp}
+|===
+
+=== Output
+
+[%autowidth.spread]
+|===
+| *Type* a| <<SecretList>>
+|===
+
+=== For Configurations
+
+* <<Config>> {nbsp}
+
+=== Throws
+
+* AKV:ACCESS_DENIED {nbsp}
+* AKV:CERTIFICATE_NOT_FOUND {nbsp}
+* AKV:CONNECTIVITY {nbsp}
+* AKV:KEY_NOT_FOUND {nbsp}
+* AKV:RETRY_EXHAUSTED {nbsp}
+* AKV:SECRET_NOT_FOUND {nbsp}
+* AKV:UNKNOWN_ERROR {nbsp}
+
+
+
+== Types
+[[Tls]]
+=== Tls
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Enabled Protocols a| String | A comma separated list of protocols enabled for this context. |  | 
+| Enabled Cipher Suites a| String | A comma separated list of cipher suites enabled for this context. |  | 
+| Trust Store a| <<TrustStore>> |  |  | 
+| Key Store a| <<KeyStore>> |  |  | 
+| Revocation Check a| * <<StandardRevocationCheck>>
+* <<CustomOcspResponder>>
+* <<CrlFile>> |  |  | 
+|======================
+
+[[TrustStore]]
+=== Trust Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the trust store. |  | 
+| Password a| String | The password used to protect the trust store. |  | 
+| Type a| String | The type of store used. |  | 
+| Algorithm a| String | The algorithm used by the trust store. |  | 
+| Insecure a| Boolean | If true, no certificate validations will be performed, rendering connections vulnerable to attacks. Use at your own risk. |  | 
+|======================
+
+[[KeyStore]]
+=== Key Store
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The location (which will be resolved relative to the current classpath and file system, if possible) of the key store. |  | 
+| Type a| String | The type of store used. |  | 
+| Alias a| String | When the key store contains many private keys, this attribute indicates the alias of the key that should be used. If not defined, the first key in the file will be used by default. |  | 
+| Key Password a| String | The password used to protect the private key. |  | 
+| Password a| String | The password used to protect the key store. |  | 
+| Algorithm a| String | The algorithm used by the key store. |  | 
+|======================
+
+[[StandardRevocationCheck]]
+=== Standard Revocation Check
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Only End Entities a| Boolean | Only verify the last element of the certificate chain. |  | 
+| Prefer Crls a| Boolean | Try CRL instead of OCSP first. |  | 
+| No Fallback a| Boolean | Do not use the secondary checking method (the one not selected before). |  | 
+| Soft Fail a| Boolean | Avoid verification failure when the revocation server can not be reached or is busy. |  | 
+|======================
+
+[[CustomOcspResponder]]
+=== Custom Ocsp Responder
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Url a| String | The URL of the OCSP responder. |  | 
+| Cert Alias a| String | Alias of the signing certificate for the OCSP response (must be in the trust store), if present. |  | 
+|======================
+
+[[CrlFile]]
+=== Crl File
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Path a| String | The path to the CRL file. |  | 
+|======================
+
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<Reconnect>>
+* <<ReconnectForever>> | The reconnection strategy to use |  | 
+|======================
+
+[[Reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[ReconnectForever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Blocking a| Boolean | If false, the reconnection strategy will run in a separate, non-blocking thread |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[Decrypt]]
+=== Decrypt
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Kid a| String |  |  | 
+| Value a| String |  |  | 
+|======================
+
+[[Encrypt]]
+=== Encrypt
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Kid a| String |  |  | 
+| Value a| String |  |  | 
+|======================
+
+[[Certificate]]
+=== Certificate
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Attributes a| <<EntityAttributes>> |  |  | 
+| Cancellation Requested a| Boolean |  |  | 
+| Certificate a| String |  |  | 
+| Content Type a| String |  |  | 
+| Id a| String |  |  | 
+| Kid a| String |  |  | 
+| Policy a| <<CertificatePolicy>> |  |  | 
+| Request Id a| String |  |  | 
+| Sid a| String |  |  | 
+| Status a| String |  |  | 
+| Target a| String |  |  | 
+| X5t a| String |  |  | 
+|======================
+
+[[EntityAttributes]]
+=== Entity Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Created a| Number |  |  | 
+| Enabled a| Boolean |  |  | 
+| Expiry a| Number |  |  | 
+| Last Updated a| Number |  |  | 
+| Not Before a| Number |  |  | 
+| Recovery Level a| String |  |  | 
+|======================
+
+[[CertificatePolicy]]
+=== Certificate Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Attributes a| <<EntityAttributes>> |  |  | 
+| Id a| String |  |  | 
+| Issuer a| <<CertificateIssuer>> |  |  | 
+| Key Properties a| <<CertificateKeyProperties>> |  |  | 
+| Lifetime Action a| Array of <<CertificateLifetimeAction>> |  |  | 
+| Secret Properties a| <<CertificateSecretProperties>> |  |  | 
+| X509 Properties a| <<CertificateX509Properties>> |  |  | 
+|======================
+
+[[CertificateIssuer]]
+=== Certificate Issuer
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Cert Transparency a| Boolean |  |  | 
+| Certificate Type a| String |  |  | 
+| Name a| String |  |  | 
+|======================
+
+[[CertificateKeyProperties]]
+=== Certificate Key Properties
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Exportable a| Boolean |  |  | 
+| Key Curve a| String |  |  | 
+| Key Size a| Number |  |  | 
+| Key Type a| String |  |  | 
+| Reuse Key a| Boolean |  |  | 
+|======================
+
+[[CertificateLifetimeAction]]
+=== Certificate Lifetime Action
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Action a| <<CertificateAction>> |  |  | 
+| Trigger a| <<CertificateTrigger>> |  |  | 
+|======================
+
+[[CertificateAction]]
+=== Certificate Action
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Action Type a| String |  |  | 
+|======================
+
+[[CertificateTrigger]]
+=== Certificate Trigger
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Days Before Expiry a| Number |  |  | 
+| Lifetime Percentage a| Number |  |  | 
+|======================
+
+[[CertificateSecretProperties]]
+=== Certificate Secret Properties
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Content Type a| String |  |  | 
+|======================
+
+[[CertificateX509Properties]]
+=== Certificate X509 Properties
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Basic Constraints a| Object |  |  | 
+| Ekus a| Array of String |  |  | 
+| Key Usage a| Array of String |  |  | 
+| Sans a| <<CertificateSubjectAlternativeNames>> |  |  | 
+| Subject a| String |  |  | 
+| Validity Months a| Number |  |  | 
+|======================
+
+[[CertificateSubjectAlternativeNames]]
+=== Certificate Subject Alternative Names
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Dns Names a| Array of String |  |  | 
+| Emails a| Array of String |  |  | 
+| Upns a| Array of String |  |  | 
+|======================
+
+[[Key]]
+=== Key
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Attributes a| <<KeyAttributes>> |  |  | 
+| Key a| <<KeyDetails>> |  |  | 
+|======================
+
+[[KeyAttributes]]
+=== Key Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Created a| Number |  |  | 
+| Enabled a| Boolean |  |  | 
+| Expiry a| Number |  |  | 
+| Last Updated a| Number |  |  | 
+| Not Before a| Number |  |  | 
+| Recovery Level a| String |  |  | 
+|======================
+
+[[KeyDetails]]
+=== Key Details
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Created a| Number |  |  | 
+| Enabled a| Boolean |  |  | 
+| Key Ops a| Array of String |  |  | 
+| Key Type a| String |  |  | 
+| Kid a| String |  |  | 
+| Recovery Level a| String |  |  | 
+| Rsa Modulus a| String |  |  | 
+| Rsa Public Exponent a| String |  |  | 
+| Updated a| Number |  |  | 
+|======================
+
+[[Secret]]
+=== Secret
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Attributes a| <<SecretAttributes>> |  |  | 
+| Content Type a| String |  |  | 
+| Id a| String |  |  | 
+| Kid a| String |  |  | 
+| Managed a| Boolean |  |  | 
+| Tags a| Object |  |  | 
+| Value a| String |  |  | 
+|======================
+
+[[SecretAttributes]]
+=== Secret Attributes
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Created a| Number |  |  | 
+| Enabled a| Boolean |  |  | 
+| Expiry a| Number |  |  | 
+| Last Updated a| Number |  |  | 
+| Not Before a| Number |  |  | 
+| Recovery Level a| String |  |  | 
+|======================
+
+[[SecretList]]
+=== Secret List
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Secret List a| Array of Any |  |  | 
+|======================
+
