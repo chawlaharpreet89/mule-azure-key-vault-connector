@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Feb 01 16:33:48 IST 2022
+azure-vault-custom-properties-provider-encrypted-1.0.0-extension-model-4.1.0.json>=
+azure-vault-custom-properties-provider-encrypted-1.0.0.pom>=
+azure-vault-custom-properties-provider-encrypted-1.0.0-mule-plugin.jar>=
